@@ -1,0 +1,43 @@
+.header {
+    height: 270px;
+    width:100%;
+    background: #f8f9fa;
+}
+
+.task-container {
+    width:50%;
+    display: grid;
+    grid-template-columns: 1fr; 
+    grid-template-rows: 1fr; 
+    gap: 20px 20px; 
+}
+
+@media screen and (max-width:600px) {
+    .task-container {
+        width:100%;
+    }
+}
+
+.task {
+    transition: box-shadow .1s ease-in-out;
+}
+
+.task:hover {
+    box-shadow: 0 3px 10px rgba(0,0,0,0.04)
+}
+
+.complete {
+    transition: color .1s ease-in-out;
+}
+
+.complete:hover {
+    color: #28a745 !important;
+}
+
+.edit {
+    transition: color .1s ease-in-out;
+}
+
+.edit:hover {
+    color: #6c757d !important;
+}
