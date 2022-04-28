@@ -37,7 +37,7 @@ export default function EditTask({ modal, toggle, update, taskObj }) {
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Edit Task</ModalHeader>
+      <ModalHeader toggle={toggle}>Update Task</ModalHeader>
       <ModalBody>
         <form>
           <div className="form-group">
