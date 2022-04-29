@@ -44,6 +44,10 @@ export default function TodoList() {
     setModal(false);
   };
 
+  const cancel = () => {
+    setModal(false);
+  };
+
   return (
     <>
       <div className="header text-center d-flex flex-column justify-content-center align-items-center">
@@ -59,10 +63,16 @@ export default function TodoList() {
             index={index}
             complete={completeTask}
             updateListArray={updateListArray}
+            cancel={cancel}
           />
         ))}
       </div>
-      <CreateTask toggle={toggle} modal={modal} save={saveTask} />
+      <CreateTask
+        toggle={toggle}
+        modal={modal}
+        save={saveTask}
+        cancel={cancel}
+      />
     </>
   );
 }

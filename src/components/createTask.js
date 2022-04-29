@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-export default function CreateTask({ modal, toggle, save }) {
+export default function CreateTask({ modal, toggle, save, cancel }) {
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskDue, setTaskDue] = useState("");
@@ -26,6 +26,18 @@ export default function CreateTask({ modal, toggle, save }) {
     taskObj["Description"] = taskDescription;
     taskObj["Due"] = taskDue;
     save(taskObj);
+  };
+
+  const handleCancel = () => {
+    cancel();
+  };
+
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate() + 1).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
   };
 
   return (
@@ -61,6 +73,7 @@ export default function CreateTask({ modal, toggle, save }) {
               className="form-control"
               value={taskDue}
               onChange={handleChange}
+              min={disablePastDate()}
             />
           </div>
         </form>
@@ -69,7 +82,9 @@ export default function CreateTask({ modal, toggle, save }) {
         <Button color="primary" onClick={handleSave}>
           Create
         </Button>
-        <Button color="secondary">Cancel</Button>
+        <Button color="secondary" onClick={handleCancel}>
+          Cancel
+        </Button>
       </ModalFooter>
     </Modal>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-export default function EditTask({ modal, toggle, update, taskObj }) {
+export default function EditTask({ modal, toggle, update, taskObj, cancel }) {
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskDue, setTaskDue] = useState("");
@@ -33,6 +33,18 @@ export default function EditTask({ modal, toggle, update, taskObj }) {
     tempObj["Description"] = taskDescription;
     tempObj["Due"] = taskDue;
     update(tempObj);
+  };
+
+  const handleCancel = () => {
+    cancel();
+  };
+
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate() + 1).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
   };
 
   return (
@@ -68,6 +80,7 @@ export default function EditTask({ modal, toggle, update, taskObj }) {
               className="form-control"
               value={taskDue}
               onChange={handleChange}
+              min={disablePastDate()}
             />
           </div>
         </form>
@@ -76,7 +89,9 @@ export default function EditTask({ modal, toggle, update, taskObj }) {
         <Button color="primary" onClick={handleUpdate}>
           Update
         </Button>
-        <Button color="secondary">Cancel</Button>
+        <Button color="secondary" onClick={handleCancel}>
+          Cancel
+        </Button>
       </ModalFooter>
     </Modal>
   );

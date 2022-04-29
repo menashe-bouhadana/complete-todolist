@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import EditTask from "./EditTask";
 
-export default function Task({ taskObj, index, complete, updateListArray }) {
+export default function Task({
+  taskObj,
+  index,
+  complete,
+  updateListArray,
+  cancel,
+}) {
   const [modal, setModal] = useState(false);
 
   const toggle = () => {
@@ -41,6 +47,7 @@ export default function Task({ taskObj, index, complete, updateListArray }) {
         toggle={toggle}
         update={updateTask}
         taskObj={taskObj}
+        cancel={cancel}
       />
     </>
   );
